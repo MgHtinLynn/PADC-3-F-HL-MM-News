@@ -1,13 +1,15 @@
-package xyz.htinlynn.padc_3_f_hl_mm_news;
+package xyz.htinlynn.news.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import xyz.htinlynn.news.R;
 
 public class MainActivity extends AppCompatActivity {
 
