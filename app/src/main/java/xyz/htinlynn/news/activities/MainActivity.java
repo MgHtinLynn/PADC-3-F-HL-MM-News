@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xyz.htinlynn.news.R;
+import xyz.htinlynn.news.adapters.NewsAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,15 +28,23 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    private NewsAdapter mNewsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ButterKnife.bind(this ,this);
+        ButterKnife.bind(this, this);
 
         setSupportActionBar(toolbar);
+
+        mNewsAdapter = new NewsAdapter();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        rvNews.setAdapter(mNewsAdapter);
+
+        rvNews.setLayoutManager(linearLayoutManager);
 
     }
 
@@ -65,4 +75,5 @@ public class MainActivity extends AppCompatActivity {
         Snackbar.make(view, "Replace with your own action -ButterKnife", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
+
 }
