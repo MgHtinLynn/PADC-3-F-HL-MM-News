@@ -14,16 +14,24 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="256dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/primary">
 
-            <ImageView
-                android:id="@+id/iv_image_logo"
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_image_logo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:fitsSystemWindows="true"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:src="@drawable/poba"-->
+                <!--/>-->
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_news_details_images"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/poba"
-                />
+                android:fitsSystemWindows="true"/>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"

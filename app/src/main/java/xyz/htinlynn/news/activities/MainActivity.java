@@ -1,5 +1,6 @@
 package xyz.htinlynn.news.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,8 +17,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import xyz.htinlynn.news.R;
 import xyz.htinlynn.news.adapters.NewsAdapter;
+import xyz.htinlynn.news.delegates.NewsActionDelegate;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NewsActionDelegate {
 
     @BindView(R.id.rv_news)
     RecyclerView rvNews;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        mNewsAdapter = new NewsAdapter();
+        mNewsAdapter = new NewsAdapter(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         rvNews.setAdapter(mNewsAdapter);
@@ -76,4 +78,26 @@ public class MainActivity extends AppCompatActivity {
                 .setAction("Action", null).show();
     }
 
+    @Override
+    public void onTrapNewsItem() {
+        Intent intent = new Intent(getApplicationContext(), NewsDetailsActivity.class);
+        startActivity(intent);
+
+
+    }
+
+    @Override
+    public void onTapCommentButton() {
+
+    }
+
+    @Override
+    public void onTapSendToButton() {
+
+    }
+
+    @Override
+    public void onTapFavouriteButton() {
+
+    }
 }
