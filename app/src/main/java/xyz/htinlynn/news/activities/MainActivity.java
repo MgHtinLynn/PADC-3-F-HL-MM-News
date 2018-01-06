@@ -8,16 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import xyz.htinlynn.news.MMNewsApp;
 import xyz.htinlynn.news.R;
 import xyz.htinlynn.news.adapters.NewsAdapter;
+import xyz.htinlynn.news.data.models.NewsModel;
 import xyz.htinlynn.news.delegates.NewsActionDelegate;
+import xyz.htinlynn.news.events.LoadedNewsEvent;
 
 public class MainActivity extends AppCompatActivity implements NewsActionDelegate {
 
@@ -47,7 +55,20 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
         rvNews.setAdapter(mNewsAdapter);
 
         rvNews.setLayoutManager(linearLayoutManager);
+        NewsModel.getsObjInstance().loadNews();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -82,8 +103,6 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     public void onTrapNewsItem() {
         Intent intent = new Intent(getApplicationContext(), NewsDetailsActivity.class);
         startActivity(intent);
-
-
     }
 
     @Override
@@ -99,5 +118,11 @@ public class MainActivity extends AppCompatActivity implements NewsActionDelegat
     @Override
     public void onTapFavouriteButton() {
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onNewsLoaded(LoadedNewsEvent event) {
+        Log.d(MMNewsApp.LOG_TAG,"OnNewsLoaded : " + event.getNewsList().size());
+        mNewsAdapter.setNews(event.getNewsList());
     }
 }
