@@ -2,6 +2,8 @@ package xyz.htinlynn.news.data.models;
 
 import xyz.htinlynn.news.network.HttpUrlConnectionDataAgent;
 import xyz.htinlynn.news.network.NewsDataAgent;
+import xyz.htinlynn.news.network.OKHttpDataAgent;
+import xyz.htinlynn.news.network.RetrofitDataAgent;
 
 /**
  * Created by htinlynn on 12/24/17.
@@ -13,7 +15,9 @@ public class NewsModel {
     private NewsDataAgent mDataAgent;
 
     private NewsModel() {
-        mDataAgent = HttpUrlConnectionDataAgent.getObjInstance();
+        //mDataAgent = HttpUrlConnectionDataAgent.getObjInstance();
+        //mDataAgent = OKHttpDataAgent.getsObjInstance();
+        mDataAgent = RetrofitDataAgent.getsObjInstance();
 
     }
     public static NewsModel getsObjInstance() {
